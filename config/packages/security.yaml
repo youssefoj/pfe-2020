@@ -1,0 +1,32 @@
+security:
+    encoders:
+        App\Entity\Administrateur:
+            algorithm: auto
+        App\Entity\Collaborateur:
+            algorithm: auto
+        App\Entity\Client:
+            algorithm: auto
+        App\Entity\Clients:
+            algorithm: auto
+
+
+    providers:
+        # used to reload user from session & other features (e.g. switch_user)
+        app_user_provider:
+            entity:
+                class: App\Entity\Clients
+                property: nommm
+        # used to reload user from session & other features (e.g. switch_user)
+     
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            anonymous: lazy
+            provider: app_user_provider
+
+    access_control:
+         - { path: ^/admin, roles: ROLE_ADMIN }
+         - { path: ^/client, roles: ROLE_USER }
+         - { path: ^/collaborateur, roles: ROLE_USER }
